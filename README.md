@@ -1,2 +1,2 @@
-# unprotect-office
+# UnprotectOffice
 Easily remove write protection from Microsoft Office files
