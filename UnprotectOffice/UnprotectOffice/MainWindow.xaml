@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UnprotectOffice"
         mc:Ignorable="d"
-        Title="UnprotectOffice " Height="240" Width="352" ResizeMode="CanMinimize">
+        Title="UnprotectOffice " Height="240" Width="352" ResizeMode="CanMinimize" Icon="Icon.ico">
     <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition />
