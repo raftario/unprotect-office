@@ -1,26 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
-using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Win32;
-using Path = System.IO.Path;
 
 namespace UnprotectOffice
 {
     /// <summary>
-    /// MainWindow interaction logic
+    ///     MainWindow interaction logic
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -29,10 +21,11 @@ namespace UnprotectOffice
         public MainWindow()
         {
             InitializeComponent();
+            Title += FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
         }
 
         /// <summary>
-        /// Open file picker and refresh label and button based on input
+        ///     Open file picker and refresh label and button based on input
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,60 +43,155 @@ namespace UnprotectOffice
                 UnprotectButton.IsEnabled = true;
                 FilesText.Text = string.Join(
                     ", ",
-                    dialog.FileNames.Select(ShortPath).ToArray()
+                    dialog.FileNames.Select(fn => FileArray(fn)[1])
                 );
 
                 _files = dialog.FileNames;
             }
             else
             {
-                UnprotectButton.IsEnabled = false;
-                FilesText.Text = "File(s)";
-
-                _files = Array.Empty<string>();
+                ResetFields();
             }
+        }
+
+        private void ResetFields()
+        {
+            UnprotectButton.IsEnabled = false;
+            FilesText.Text = "None";
+
+            _files = Array.Empty<string>();
         }
 
         private void OpenUri(object sender, RequestNavigateEventArgs e)
         {
-            System.Diagnostics.Process.Start(e.Uri.ToString());
+            Process.Start(e.Uri.ToString());
         }
 
         /// <summary>
-        /// Remove write protection from files
+        ///     Remove write protection from files
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UnprotectFiles(object sender, RoutedEventArgs e)
         {
-            foreach (var file in _files)
+            UnprotectButton.IsEnabled = false;
+            ProgressText.Text = "Starting...";
+
+            try
             {
-                var extractPath = ExtractFile(file);
+                foreach (var file in _files)
+                {
+                    var f = FileArray(file);
+
+                    ProgressText.Text = $"Extracting {f[1]}...";
+                    var extractPath = ExtractFile(f);
+
+                    ProgressText.Text = $"Unprotecting {f[1]}...";
+                    Unprotect(extractPath, f[3]);
+
+                    ProgressText.Text = $"Compressing {f[1]}...";
+                    var newFile = $"{extractPath}.{f[3]}";
+                    ZipFile.CreateFromDirectory(extractPath, newFile);
+
+                    ProgressText.Text = $"Saving {f[1]}...";
+                    var backupFile = BackupCheck.IsChecked == true
+                        ? $"{f[4]}{Path.DirectorySeparatorChar}{f[2]}-backup.{f[3]}"
+                        : $"{extractPath}.backup";
+
+                    File.Delete(backupFile);
+                    File.Move(f[0], backupFile);
+                    File.Move(newFile, f[0]);
+
+                    Directory.Delete(new DirectoryInfo(extractPath).Parent.FullName, true);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"An error occured while trying to unprotect the files.\n{ex.Message}",
+                    "Error",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
+                Application.Current.Shutdown();
+            }
+
+            ProgressText.Text = "Done.";
+            ResetFields();
         }
 
         /// <summary>
-        /// Extract file to temporary directory
+        ///     Extract file to temporary directory
         /// </summary>
-        /// <param name="file">Path to file</param>
-        /// <returns>Path to extraction directory</returns>
-        private static string ExtractFile(string file)
+        /// <param name="file">File information array</param>
+        /// <returns>Extraction directory path</returns>
+        private static string ExtractFile(string[] file)
         {
-            var extractPath = Path.Combine(Path.GetTempPath(), ShortPath(file));
+            var extractPath = Path.Combine(Path.GetTempPath(),
+                "UnprotectOffice",
+                DateTime.Now.ToString("yyyyMMddhhmmss"),
+                file[2]
+            );
 
-            ZipFile.ExtractToDirectory(file, extractPath);
+            ZipFile.ExtractToDirectory(file[0], extractPath);
 
             return extractPath;
         }
 
         /// <summary>
-        /// Get the file name from a path
+        ///     Remove lines that enable write protection from files
         /// </summary>
-        /// <param name="file">Path</param>
-        /// <returns>File name</returns>
-        private static string ShortPath(string file)
+        /// <param name="path">File path</param>
+        /// <param name="ext">File extension</param>
+        private static void Unprotect(string path, string ext)
         {
-            return file.Split(Path.DirectorySeparatorChar).Last();
+            RemoveFileTextRegex(Path.Combine(path, "docProps", "app.xml"), "<DocSecurity>.*?</DocSecurity>");
+
+            var type = ext[0];
+            switch (type)
+            {
+                case 'd':
+                    RemoveFileTextRegex(Path.Combine(path, "word", "settings.xml"), "<w:documentProtection.*?/>");
+                    break;
+            }
+        }
+
+        /// <summary>
+        ///     Remove a regex from a file
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <param name="pattern">Regex pattern</param>
+        private static void RemoveFileTextRegex(string file, string pattern)
+        {
+            var fileText = File.ReadAllText(file);
+            fileText = Regex.Replace(fileText, pattern, string.Empty);
+            File.WriteAllText(file, fileText);
+        }
+
+        /// <summary>
+        ///     Create a file information array
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <returns>
+        ///     [0] Full path
+        ///     [1] File name
+        ///     [2] File name without extension
+        ///     [3] File extension
+        ///     [4] Parent directory
+        /// </returns>
+        private static string[] FileArray(string file)
+        {
+            var dirArray = file.Split(Path.DirectorySeparatorChar);
+            var extArray = dirArray.Last().Split('.');
+
+            return new[]
+            {
+                file,
+                dirArray.Last(),
+                string.Join(".", extArray.Take(extArray.Length - 1)),
+                extArray.Last(),
+                string.Join(Path.DirectorySeparatorChar.ToString(), dirArray.Take(dirArray.Length - 1))
+            };
         }
     }
 }
