@@ -8,7 +8,7 @@
         Title="UnprotectOffice " Height="240" Width="352" ResizeMode="CanMinimize" Icon="Icon.ico">
     <Grid Margin="8">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="1.8*" />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition Height="0.2*" />
@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"
                    TextWrapping="WrapWithOverflow" TextAlignment="Center">
-            Select the file(s) you want to unprotect and click the "Unprotect" button to proceed.
+            Select the file(s) you want to be able to edit and click the "Unprotect" button to proceed. The original file(s) will be replaced by the new, editable one(s).
         </TextBlock>
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal"
                     HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -28,7 +28,7 @@
         </StackPanel>
         <CheckBox x:Name="BackupCheck" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"
                   VerticalAlignment="Center" IsChecked="True">
-            <TextBlock>Keep original file(s)</TextBlock>
+            <TextBlock>Backup original file(s)</TextBlock>
         </CheckBox>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center"
                     VerticalAlignment="Center">
