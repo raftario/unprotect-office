@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/cosmo/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-uhut8PejFZO8994oEgm/ZfAv0mW1/b83nczZzSwElbeILxwkN491YQXsCFTE6+nx" crossorigin="anonymous">
+
+    <title>UnprotectOffice</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+</head>
+<body>
+<header class="p-5 bg-warning text-light mb-0">
+    <div class="container">
+        <h1 class="display-1">
+            U<span class="d-none d-md-inline">nprotect</span>O<span class="d-none d-md-inline">ffice</span>
+            <small class="font-weight-light">1.1.0</small>
+        </h1>
+        <p class="lead ml-3">Easily remove write protection from Microsoft Office files</p>
+    </div>
+</header>
+<div class="p-5 bg-secondary text-light mt-0 mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <a class="btn btn-warning btn-lg"
+                   href="https://github.com/raftario/unprotect-office/releases/download/v1.1.0/UnprotectOffice.exe">
+                    Download
+                </a>
+            </div>
+            <div class="col-md text-md-right">
+                <div class="btn-group" role="group">
+                    <a class="btn btn-outline-light btn-lg" href="https://github.com/raftario/unprotect-office#readme">
+                        Readme
+                    </a>
+                    <a class="btn btn-outline-light btn-lg"
+                       href="https://github.com/raftario/unprotect-office/blob/master/LICENSE">
+                        License
+                    </a>
+                    <a class="btn btn-outline-light btn-lg" href="https://github.com/raftario/unprotect-office/issues">
+                        Issues
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <h3 class="display-3">Features</h3>
+    <p class="lead">
+        UnlockOffice lets you remove any write protection from an Office document with a couple clicks, while keeping
+        its original formatting.
+    </p>
+    <hr class="my-3">
+    <ul>
+        <li>
+            Standalone. You don't need to install it, just download and run it. You can event put it on a USB drive and
+            use it anywhere.
+        </li>
+        <li>
+            Password resistant. It doesn't care if the document needs a password to be edited, it just removes it.
+        </li>
+        <li>
+            Small. It uses native .NET features and is even smaller than some Office documents.
+        </li>
+        <li>
+            Fast. It only does what it needs to do, so the process is extremely fast.
+        </li>
+        <li>
+            Easy to use. There are 3 buttons.
+        </li>
+        <li>
+            Open source. Anyone can see how it works, reuse it or make it better.
+        </li>
+    </ul>
+    <h3 class="display-3">Supported formats</h3>
+    <p class="lead">UnlockOffice supports Word documents and will support PowerPoint and Excel documents soon.</p>
+    <hr class="my-3">
+    <div class="row">
+        <div class="col-md">
+            <img class="my-3" src="doc.svg" alt="Word document" height="128">
+            <p class="lead">
+                Word
+                <small class="font-weight-light">(.docx & .docm)</small>
+            </p>
+        </div>
+        <div class="col-md text-md-center" style="opacity: 0.5">
+            <img class="my-3" src="ppt.svg" alt="PowerPoint document" height="128">
+            <p class="lead">
+                PowerPoint
+                <small class="font-weight-light">(.pptx & .pptm)</small>
+            </p>
+        </div>
+        <div class="col-md text-md-right" style="opacity: 0.5">
+            <img class="my-3" src="xls.svg" alt="Excel document" height="128">
+            <p class="lead">
+                Excel
+                <small class="font-weight-light">(.xlsx & .xlsm)</small>
+            </p>
+        </div>
+    </div>
+    <h3 class="display-3">Screenshot</h3>
+    <p class="lead">How does it look ?</p>
+    <hr class="my-3">
+    <img class="my-3" src="screenshot.png" alt="Screenshot" width="352" height="240">
+    <h3 class="display-3">How it works</h3>
+    <p class="lead">A small description of the unprotecting process</p>
+    <hr class="my-3">
+    <p>
+        The document is extracted in a temporary directory. The program check for lines enabling write protection in
+        every file where they may appear and deletes them. The document is then compressed back to its original format
+        and the temporary directory is deleted. The old file is replaced by the new, editable one and the old one is
+        renamed or deleted.
+    </p>
+</div>
+<footer class="bg-secondary text-light mt-5">
+    <div class="container pt-3 pb-1">
+        <div class="row">
+            <div class="col-md">
+                <p>© Raphaël Thériault and contributors</p>
+            </div>
+            <div class="col-md text-md-right">
+                <a class="text-warning" href="https://github.com/raftario/unprotect-office">
+                    View source on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
