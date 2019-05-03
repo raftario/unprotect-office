@@ -39,7 +39,11 @@
             </Button>
         </StackPanel>
         <TextBlock Grid.Row="3" Grid.Column="0" FontSize="8" TextAlignment="Left">© Raphaël Thériault and contributors</TextBlock>
+        <StackPanel Grid.Row="3" Grid.Column="1"></StackPanel>
         <TextBlock Grid.Row="3" Grid.Column="1" FontSize="8" TextAlignment="Right">
+            <Hyperlink NavigateUri="https://raftario.github.io/unprotect-office/" RequestNavigate="OpenUri">
+                Website
+            </Hyperlink>
             <Hyperlink NavigateUri="https://github.com/raftario/unprotect-office" RequestNavigate="OpenUri">
                 View source on GitHub
             </Hyperlink>
