@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,7 +30,7 @@
             U<span class="d-none d-md-inline">nprotect</span>O<span class="d-none d-md-inline">ffice</span>
             <small class="font-weight-light">1.2.0</small>
         </h1>
-        <p class="lead ml-3">Easily remove write protection from Microsoft Office files</p>
+        <p class="lead ml-3">Retirez facilement les protections des documents Microsoft Office</p>
     </div>
 </header>
 <div class="p-5 bg-secondary text-light mt-0 mb-5">
@@ -39,7 +39,7 @@
             <div class="col-md">
                 <a class="btn btn-warning btn-lg"
                    href="https://github.com/raftario/unprotect-office/releases/download/v1.2.0/UnprotectOffice.exe">
-                    Download
+                    Télécharger
                 </a>
             </div>
             <div class="col-md text-md-right">
@@ -60,27 +60,51 @@
     </div>
 </div>
 <div class="container">
-    <h3 class="display-3">Features</h3>
+    <h3 class="display-3">Fonctionnalités</h3>
     <p class="lead">
-        UnprotectOffice lets you remove any write protection from an Office document with a couple clicks, while keeping
-        its original formatting.
+        UnprotectOffice vous perment de retirer n'importe quelle protection d'un document Office en quelques clics, tout
+        en gardant son formatage original.
     </p>
     <hr class="my-3">
     <ul>
         <li>
-            Standalone. You don't need to install it, just download and run it. You can event put it on a USB drive and
-            use it anywhere.
+            Autonome. Vous n'avez pas à l'installer, seulement à le télécharger et le démarrer. Vous pouvez même le
+            transférer sur une clef USB et l'utiliser n'importe où.
         </li>
+        <li>Insensible aux mots de pass. Le programme ne fait pas attention aux mots de passe, il les retires.</li>
         <li>
-            Password insensitive. It doesn't care if the document needs a password to be edited, it just removes it.
+            Légér. Le programme utiliste des fonctionnalités .NET natives et est même plus petit que certains documents
+            Ofice.
         </li>
-        <li>Small. It uses native .NET features and is even smaller than some Office documents.</li>
-        <li>Fast. It only does what it needs to do, so the process is extremely fast.</li>
-        <li>Easy to use. There are 3 buttons.</li>
-        <li>Open source. Anyone can see how it works, reuse it or make it better.</li>
+        <li>Rapide. Le programme de fait que ce qu'il a à faire, le processus est donc extrèmement rapide.</li>
+        <li>Facile à utiliser. Il n'y a que trois boutons.</li>
+        <li>
+            Open source. N'importe qui peut voir comment fonctionne le programme, l'utiliser dans un projet ou
+            l'améliorer.
+        </li>
     </ul>
-    <h3 class="display-3">Supported formats</h3>
-    <p class="lead">UnprotectOffice supports Word documents and will support PowerPoint and Excel documents soon.</p>
+    <h3 class="display-3">Utilisation</h3>
+    <p class="lead">
+        UnprotectOffice tente le plus possible d'être facile à utiliser.
+    </p>
+    <hr class="my-3">
+    <ol>
+        <li>Cliquez sur le bouton <kbd>Browse</kbd>.</li>
+        <li>Choisissez le ou les fichiers à convertir.</li>
+        <li>
+            Choisissez si vous souhaitez créer une copie du fichier original (décochez la case pour supprimer
+            l'original).
+        </li>
+        <li>Cliquez sur le bouton <kbd>Unprotect</kbd> pour retirer les protections.</li>
+    </ol>
+    <p class="text-muted">
+        Il n'est malheureusement pas possible de traduire l'interface du logiciel en français, car cela retirerait
+        plusieurs de ses avantages, dont la portabilité.
+    </p>
+    <h3 class="display-3">Formats supportés</h3>
+    <p class="lead">
+        UnprotectOffice supporte les documents Word et supportera bientôt les documents PowerPoint et Excel.
+    </p>
     <hr class="my-3">
     <div class="row">
         <div class="col-md">
@@ -105,31 +129,33 @@
             </p>
         </div>
     </div>
-    <h3 class="display-3">Screenshot</h3>
-    <p class="lead">How does it look ?</p>
+    <h3 class="display-3">Capture d'écran</h3>
+    <p class="lead">De quoi le programme a-t-il l'air ?</p>
     <hr class="my-3">
     <img class="my-3" src="screenshot.png" alt="Screenshot" width="352" height="240">
-    <h3 class="display-3">How it works</h3>
+    <h3 class="display-3">Fonctionnement</h3>
     <p class="lead">A small description of the unprotecting process</p>
     <hr class="my-3">
     <p>
-        The document is extracted in a temporary directory. The program check for lines enabling write protection in
-        every file where they may appear and deletes them. The document is then compressed back to its original format
-        and the temporary directory is deleted. The old file is replaced by the new, editable one. The old file is
-        either renamed or deleted, depending on which option was chosen.
+        Le document est extrait dans un répertoire temporaire. Le programme cherche des lignes de codes qui active la
+        protection dans chaque fichier où elles peuvent apparaitre et les supprime. Le document est alors compréssé vers
+        son format original et le répertoire temporaire est supprimé. L'ancien fichier est remplacé par le nouveau,
+        maintenant modifiable. L'ancien fichier est soit renommé, soit supprimé, selon l'option choisie.
     </p>
 </div>
 <footer class="bg-secondary text-light mt-5">
     <div class="container pt-3 pb-1">
         <div class="row">
             <div class="col-md">
-                <p>© Raphaël Thériault and contributors</p>
+                <p>© Raphaël Thériault et contributeurs</p>
             </div>
             <div class="col-md text-md-center">
-                <a class="text-warning" href="https://github.com/raftario/unprotect-office">View source on GitHub</a>
+                <a class="text-warning" href="https://github.com/raftario/unprotect-office">
+                    Voir les sources sur GitHub
+                </a>
             </div>
             <div class="col-md text-md-right">
-                <a class="text-warning" href="./fr.html?noredirect">FR</a>
+                <a class="text-warning" href="./index.html?noredirect">EN</a>
             </div>
         </div>
     </div>
@@ -142,8 +168,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
-  if (navigator.language.startsWith('fr') && !(new URLSearchParams(location.search).has('noredirect'))) {
-    location.href = './fr.html'
+  if (navigator.language.startsWith('en') && !(new URLSearchParams(location.search).has('noredirect'))) {
+    location.href = './index.html'
   }
 </script>
 </body>
